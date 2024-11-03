@@ -1,0 +1,37 @@
+<%- include("header.ejs") %>
+<main>
+  <section id="Searchbook_result_container" class="container">
+    <div id="Searchbook" class="row my-2 py-5">
+      <% 
+      if(SearchBookList.length > 0){ 
+        SearchBookList.forEach(Book => {
+      %>
+      <div class="col-12">
+        <div id="Searchbook_item-<%= Book.id %>" class="Searchbook_item row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+          <div class="col-auto d-none d-lg-block">
+            <img src="<%=Book.volumeInfo.imageLinks?.thumbnail||"/images/not found cover.jpg"%>" loading="lazy" style="height: auto; width: 100%; object-fit: contain;">
+          </div>
+          <div class="col p-4 d-flex flex-column position-static">
+            <h3 class="mb-0 fw-semibold"> <%= Book.volumeInfo.title %> </h3>
+            <div class="mb-1 text-body-secondary"><%= Book.volumeInfo.authors  %></div>
+            <p class="card-text mb-auto"> 
+              <p><%= Book.volumeInfo.description %></p>  
+            </p>
+            <div class="d-flex gap-2 mt-2 justify-content-between">
+              <form class="addBookForm" action="/addbook/<%=Book.id%>" method="POST">
+                <button type="submit" class="btn btn-primary fw-medium" style="background-color: var(--main-color);">Add to My Books</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <%
+        }); 
+      } else {
+      %>
+      <%- include("empty.ejs") %>
+      <% } %>
+    </div>
+  </section>
+</main>
+<%- include("footer.ejs") %>

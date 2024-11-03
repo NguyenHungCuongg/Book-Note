@@ -1,0 +1,620 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+:root{
+  --header-font: "Bebas Neue", sans-serif;
+  --main-font: "Poppins", sans-serif;
+  --black: #231C18;
+  --rgb-black: 35, 28, 24;
+  --white: #D8CFAE;
+  --main-color: #8D6D3C;
+  --secondary-color: #5B4A3A;
+  --light-color: #B88A50;
+  --neutral-color: #827C7A;
+  --success-color:  #1e6e3c;
+  --fail-color: #8a2237 ;
+}
+
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: 0;
+}
+
+body{
+  font-family: var(--main-font);
+  margin: 0;
+  padding: 0;
+  background-color: var(--black);
+}
+
+/*--------------------------Home page------------------------------*/
+#Header{
+  margin: auto;
+  position: relative;
+  z-index: 100;
+  display: inline;
+}
+
+#Header_container{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 30px 0 30px ;
+}
+
+.logo a{
+  font-family: var(--header-font);
+  font-size: 32px;
+  color: var(--light-color) !important;
+}
+
+.logo a:hover{
+  scale: 1.05;
+  transition: 0.2s ease-in-out;
+  color: var(--main-color) !important;
+}
+
+.nav_container .nav{
+  gap: 32px;
+}
+
+.nav_container ul li{
+  position: relative;
+}
+
+.nav_container ul li a{
+  color: var(--white) !important;
+}
+
+.nav_container ul li a:after{
+  content: "";
+  position: absolute;
+  height: 3px;
+  width: 0%;
+  background-color: var(--main-color);
+  left: 0;
+  bottom: -2px;
+  left: 50%;
+  border-radius: 1.5px;
+  transform: translate(-50%, -50%);
+  transition: 0.3s ease-in-out;
+}
+
+.nav_container ul li a:hover::after{
+  color: var(--white) !important;
+  width: 80%;
+  transition: 0.2s ease-in-out;
+}
+
+.nav_container ul li a:hover{
+  color: var(--white) !important;
+  opacity: 0.8;
+  scale: 1.05;
+  transition: 0.3s ease-in-out;
+}
+
+
+#My_carousel{
+  width: 100vw;
+  height: 100vh;
+  margin-top: -100px;
+  overflow: hidden;
+  position: relative;
+}
+
+#Carousel_title_container{
+  height: 100%;
+}
+
+#Carousel_title_container p{
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  z-index: 1;
+  text-shadow: 0 0 10px var(--secondary-color);
+}
+
+#Carousel_title{
+  color: var(--white);
+  font-size: 100px;
+  font-weight: 700;
+}
+
+#Carousel_description{
+  color: var(--white);
+  font-size: 20px;
+  font-weight: 300;
+}
+
+#Carousel_container {
+  position: relative;
+  height: 100%;
+}
+
+#Carousel_container::after{
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    linear-gradient(
+      to bottom, rgba(var(--rgb-black), 1) 0%, rgba(var(--rgb-black), 0.5) 30%, transparent 100%
+    ),
+    linear-gradient(
+      to top, rgba(var(--rgb-black), 1) 0%, rgba(var(--rgb-black), 0.3) 30%, transparent 100%
+    );  
+}
+
+.Carousel_item {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+  display: inline-block;
+}
+
+.Carousel_item img{
+  display: block;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.Carousel_item.active {
+  opacity: 1;
+}
+
+.dropdown ::after{
+  color: var(--white);
+}
+
+/*Discorvery part*/
+.swiper{
+  width: 100%;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.fade-effect-left,
+.fade-effect-right {
+  z-index: 10; 
+}
+
+.fade-effect-left {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 260px; 
+  height: 100%;
+  background: linear-gradient(to right, var(--black) 20%, rgba(255, 255, 255, 0) 100%);
+  pointer-events: none;
+}
+
+.fade-effect-right {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 260px; 
+  height: 100%;
+  background: linear-gradient(to left,var(--black) 20%, rgba(255, 255, 255, 0) 100%);
+  pointer-events: none;
+}
+
+.Book_item{
+  scale: 0.9;
+  transition: scale 0.5s ease-in;
+
+  background-color: var(--white);
+  display: flex;
+  flex-direction: column;
+}
+
+.card-body {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-title {
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: var(--black);
+}
+
+.card-text {
+  font-size: 14px;
+  flex-grow: 1;
+  overflow: hidden; 
+  text-overflow: ellipsis; 
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3; /* Giới hạn text trong 3 dòng */
+  line-clamp: 3;
+  color: var(--black);
+}
+
+.addBookForm .btn{
+  background-color: var(--main-color);
+  color: var(--white);
+  border: none;
+}
+
+.addBookForm .btn:hover{
+  background-color: var(--secondary-color);
+  scale: 1.05;
+  transition: 0.2s ease-in;
+}
+
+
+.swiper-slide-active,
+.swiper-slide-duplicate-active{
+  scale: 1;
+}
+
+.swiper-pagination-bullet{
+  background-color: var(--neutral-color);
+  height: 10px;
+  width: 10px;
+}
+
+.swiper-button-prev,
+.swiper-button-next{
+  z-index: 11;
+  &::after{
+    color: var(--white);
+  } 
+  margin: 0px 12px 0px 12px;
+}
+
+.swiper-button-prev:hover,
+.swiper-button-next:hover{
+  &::after{
+    scale: 1.05;
+    transition: 0.1s ease-in;
+  }
+}
+
+.Genre_header{
+  text-align: start;
+  margin: 32px 64px 0px 64px;
+  color: var(--light-color);
+}
+
+.Genre_subheader{
+  text-align: start;
+  font-size: 20px;
+  margin: 6px 64px 0px 64px;
+  color: var(--main-color);
+}
+
+/*Footer part*/
+#Footer footer p,
+#Footer footer ul li a{
+  color: var(--white);
+}
+
+#Footer footer ul li a i::before{
+  font-size: 24px;
+}
+
+#Footer footer ul{
+  border-bottom-color: var(--white) !important;
+}
+
+.fb_icon{
+  color: var(--white) !important;
+}
+
+/*Adding result*/
+.failPopup_container,
+.alreadyPopup_container,
+.successPopup_container{
+  z-index: 100;
+  position: fixed;
+  color: var(--white);
+  top: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  justify-content: center;
+  align-items: center;
+}
+
+.failPopup_container{
+  background-color: var(--fail-color);
+}
+
+.successPopup_container{
+  background-color: var(--success-color);
+}
+
+.alreadyPopup_container{
+  background-color: var(--light-color);
+  color: var(--black);
+}
+
+/*--------------------------My books------------------------------*/
+#Mybook_header_container{
+  background-color: var(--black);
+}
+
+#Mybook_collection_container{
+  padding: 10px 240px;
+  background-color: var(--secondary-color);
+}
+
+.Mybook_item{
+  background-color: var(--white);
+  border: none !important;
+}
+
+.viewNoteForm button{
+  color: var(--white);
+  background-color: var(--main-color);
+}
+
+.viewNoteForm button:hover{
+  color: var(--white);
+  background-color: var(--secondary-color);
+}
+
+.deleteBookForm i{
+  cursor: pointer;
+  font-size: 24px;
+  color: var(--black);
+}
+
+.deleteBookForm i:hover{
+  scale: 1.1;
+  transition: ease-out 0.1s;
+}
+
+.modal-header{
+  background-color: var(--main-color);
+}
+
+.modal-header .btn-close{
+  color: var(--white) !important;
+}
+
+.modal-footer .modalConfirmButton{
+  color: var(--white);
+  background-color: var(--fail-color) !important;
+}
+
+.modal-footer .modalConfirmButton:hover{
+  color: var(--white);
+  background-color:  #6f192a !important;
+}
+
+.modal-footer .modalCloseButton{
+  color: var(--black);
+  background-color: var(--white) !important;
+}
+
+.modal-footer .modalCloseButton:hover{
+  color: var(--black);
+  background-color: #c0b695 !important;
+}
+/*--------------------------Search Book------------------------------*/
+.Searchbook_item{
+  background-color: var(--white);
+}
+
+/*--------------------------Book Note------------------------------*/
+.editSection .modalSaveButton,
+.editSection #editButton{
+  background-color: var(--light-color);
+  color: var(--black);
+  border: none;
+}
+
+.editSection .modalSaveButton:hover,
+.editSection #editButton:hover{
+  background-color: #9a703c;
+  color:  var(--black);
+  scale: 1.05;
+  transition: 0.2s ease-in;
+}
+
+.rangeContainer{
+  color: var(--main-color);
+}
+
+input[type="range"]{
+  -webkit-appearance: none !important;
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+  width: 100%;
+}
+
+input[type="range"]:focus{
+  outline: none;
+}
+
+input[type="range"]::-webkit-slider-runnable-track{
+  background: var(--white);
+  height: 8px;
+  border-radius: 12px;
+}
+
+input[type="range"]::-moz-range-track{
+  background: var(--white);
+  height: 8px;
+  border-radius: 12px;
+}
+
+input[type="range"]::-webkit-slider-thumb{
+  -webkit-appearance: none;
+  appearance: none;
+  height: 16px;
+  width: 16px;
+  border-radius: 100%;
+  background-color: white;
+  outline: 2px solid var(--main-color);
+  margin-top: -5px;
+}
+
+#bookReviewContainer h3{
+  font-size: 32px;
+  font-weight: 300 !important;
+  border-color: var(--white) !important;
+}
+
+#bookReviewContainer h2{
+  font-family: 'loto';
+  text-transform: uppercase;
+}
+#editButton{
+  font-size: large;
+}
+
+.editSection .modal-body h5{
+  color: var(--secondary-color);
+  justify-self: start;
+  margin: 12px 0px 12px 0px ;
+}
+
+.editSection .modal-body h5{
+  color: var(--secondary-color);
+  justify-self: start;
+  margin: 12px 0px 12px 0px ;
+}
+
+.editSection textarea{
+  border-color: var(--secondary-color);
+}
+
+#backButton{
+  border: 2px solid var(--white);
+  color: var(--white);
+}
+
+#backButton:hover{
+  opacity: 0.6;
+  scale: 1.05;
+  transition: 0.1s ease-out;
+}
+
+.bookNoteContent{
+  line-height: 1.6;
+  text-indent: 30px;
+}
+
+.formattedText {
+  white-space: pre-wrap;
+}
+
+/*--------------------------Classlist------------------------------*/
+.hide{
+  display: none !important;
+}
+
+/*Responsive part*/
+@media (max-width: 991px) {
+  #My_carousel{
+    width: 100vw;
+    margin-top: -330px;
+  }
+  #Header_container{
+    justify-content: center;
+    flex-direction: column;
+  }
+  .nav_container .nav{
+    gap: 20px;
+  }
+  .logo a{
+    font-size: 50px;
+  }
+  .user_container{
+    flex-direction: column;
+  }
+  .user_container img{
+    width: 100px;
+    height: 100px;
+  }
+  #Carousel_title_container p{
+    top: 50%;
+  }
+  #Carousel_title{
+    font-size: 70px;
+  }
+  #Carousel_description{
+    font-size: 16px;
+  }
+  .Genre_header{
+    text-align: center;
+  }
+  .Genre_subheader{
+    text-align: center;
+  }
+  #Mybook_collection_container{
+    padding: 10px 40px;
+  }
+}
+@media (max-width: 540px) {
+  .nav_container .nav{
+    gap: 5px;
+  }
+  #Carousel_title{
+    font-size: 68px;
+  }
+  #Carousel_title_container p{
+    top: 60%;
+  }
+  .dropdown ::after{
+    display: none;
+  }
+  .Genre_header{
+    text-align: center;
+  }
+  .Genre_subheader{
+    text-align: center;
+  }
+  #Mybook_collection_container{
+    padding: 10px 10px;
+  }
+}
+
+/*Animation part*/
+@keyframes appear {
+  from{
+    opacity: 0;
+    transform: translateY(-250px);
+  }
+  to{
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+
+@keyframes disappear {
+  from {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(250px);
+  }
+}
+
+.view1 > *{
+  animation: appear linear;
+  animation-timeline: view();
+  animation-range: entry 0;
+} 
+
+.view2 > *{
+  animation: disappear linear;
+  animation-timeline: view();
+  animation-range: exit 0;
+} 

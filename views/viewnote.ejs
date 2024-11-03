@@ -1,0 +1,65 @@
+<%- include("header.ejs") %>
+<main>
+  <div id="bookReviewContainer" class="container mt-5" style="color: var(--white);">
+    <h3 class="pb-4 mb-4 border-bottom text-center">
+      My Review
+    </h3>
+    <article class="blog-post" style="color: var(--white);">
+      <h2 class="display-5 mb-1 text-center" style="font-family: 'loto'; color: var(--light-color);"><%= reviewBook.volumeInfo.title %></h2>
+      <p class="blog-post-meta text-center pb-4"><%= reviewBook.volumeInfo.publishedDate ? reviewBook.volumeInfo.publishedDate : 'N/A' %> 
+        by <%= reviewBook.volumeInfo.authors ? reviewBook.volumeInfo.authors[0] : 'Unknown Author' %></p>
+      <hr>
+      <% if (userReview) { %>
+        <p class="bookNoteContent pb-5 pt-2 px-5 formattedText"><%= userReview.note %></p>
+        <p class="bookRatingContent text-center" style="font-family: 'loto'; font-size: 40px;">MY RATING: 
+          <span style="color: var(--light-color);"><%= userReview.rating %> </span>/10</p>
+      <% } else { %>
+        <p class="bookNoteContent text-center pb-5 pt-2 px-5">You haven't taken any notes on this book yet! Jot down your thoughts 
+          <br>to easily revisit and discover more later!</p>
+        <p class="bookRatingContent text-center" style="font-family: 'loto'; font-size: 40px;">MY RATING: N/A</p>
+      <% } %>
+    </article>
+    <!--Edit form-->
+    <section class="editSection">
+      <div class="text-center my-2 d-flex gap-2 justify-content-end">
+        <form id="editNoteForm-<%= reviewBook.id %>" data-book-id="<%= reviewBook.id %>" class="editNoteForm d-flex align-items-center justify-content-center" action="/editnote/<%= reviewBook.id %>" method="POST">
+          <button id="editButton" type="button" class="btn btn-primary fw-semibold" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <% if (userReview) { %>
+              Edit Note
+            <%} else { %>
+              Add Note
+            <% } %>
+          </button>
+          <div class="modal fade modal-lg" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header" data-bs-theme="dark">
+                  <h1 class="modal-title fs-5" id="exampleModalLabel">Review my book</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <h5>My Note:</h5>
+                  <textarea class="form-control" rows="10" name="noteContent" required><%= userReview && userReview.note ? userReview.note : '' %></textarea>
+                  <h5 id="myRating">My Rating: <span id="ratingDisplay">5.0</span></h5>
+                  <div class="rangeContainer d-flex py-4 px-3 my-2">
+                    <div class="rightRange mx-3">0</div>
+                    <input type="range" min="0" max="10" step="0.1" id="ratingRange" name="rating" oninput="updateRatingValue()">
+                    <div class="rightRange mx-3">10</div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="modalCloseButton btn" data-bs-dismiss="modal">Close</button>
+                  <button type="submit" class="modalSaveButton btn fw-medium" data-bs-dismiss="modal">Save changes</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+        <form action="/mybook" method="GET">
+          <button type="submit" id="backButton" class="btn">Back</button>
+        </form>
+      </div>
+    </section>
+  </div>
+</main>
+<%- include("footer.ejs") %>

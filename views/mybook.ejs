@@ -1,0 +1,73 @@
+<%- include("header.ejs") %>
+<main>
+  <!--My book header-->
+  <section id="Mybook_header_container" class="py-5 text-center container">
+    <div class="row py-lg-5">
+      <div class="col-lg-6 col-md-8 mx-auto" style="color: var(--white);">
+        <h1 class="fw-medium">A Journey Through My Favorite Reads</h1>
+        <p class="lead">Discover and reflect on the books you've read and rated. Your collection captures your 
+          literary journey, filled with favorite authors and impactful stories. Add new books, track your progress, 
+          and continue building your unique library.</p>
+      </div>
+    </div>
+  </section>
+  <!--My book content-->
+  <section id="Mybook_collection_container" class="container-fluid">
+    <div id="Mybook_collection" class="row my-2 py-5">
+      <% 
+      if(MyBookList.length > 0){ 
+        MyBookList.forEach(Book => {
+      %>
+      <div class="col-12">
+        <div id="Mybook_item-<%= Book.book_id %>" class="Mybook_item row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+          <div class="col-auto d-none d-lg-block">
+            <img src="<%= Book.thumbnail ||"/images/not found cover.jpg"%>" loading="lazy" style="height: auto; width: 100%; object-fit: contain;">
+          </div>
+          <div class="col p-4 d-flex flex-column position-static">
+            <strong class="d-inline-block mb-2 fw-large text-primary-emphasis">Your rating:</strong>
+            <h3 class="mb-0 fw-semibold"> <%= Book.title %> </h3>
+            <div class="mb-1 text-body-secondary"><%= Book.author %></div>
+            <p class="card-text mb-auto"> 
+              <p><%- Book.description%></p>  
+            </p>
+            <div class="d-flex gap-2 mt-2 justify-content-between">
+              <form class="viewNoteForm" action="/viewnote/<%= Book.book_id %>" method="GET">
+                <button type="submit" class="btn fw-medium">View My Note >></button>
+              </form>
+              <form id="deleteBookForm-<%= Book.book_id %>" data-book-id="<%= Book.book_id %>" class="deleteBookForm d-flex align-items-center" action="/deletebook/<%= Book.book_id %>" method="POST">
+                <i class="fa-solid fa-trash px-2"  
+                data-bs-toggle="modal" data-bs-target="#exampleModal-<%= Book.book_id %>"></i>
+                <div class="modal fade" id="exampleModal-<%= Book.book_id %>" tabindex="-1" aria-labelledby="exampleModalLabel-<%= Book.book_id %>" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header" data-bs-theme="dark">
+                        <h1 class="modal-title fs-5 text-light" id="exampleModalLabel-<%= Book.book_id %>">Are you sure?</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body fw-light">
+                        Please note that this action will permanently remove the book, along with your associated rating and any notes you have provided. Do you wish to continue?
+                      </div>
+                      <div class="modal-footer">
+                        <button class="modalCloseButton btn" id="modalCloseButton-<%= Book.book_id %>" type="button" data-bs-dismiss="modal">Close</button>
+                        <button class="modalConfirmButton btn fw-medium" id="modalConfirmButton-<%= Book.book_id %>" data-bs-dismiss="modal" type="submit">
+                            Delete
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <%
+        }); 
+      } else {
+      %>
+      <%- include("empty.ejs") %>
+      <% } %>
+    </div>
+  </section>
+</main>
+<%- include("footer.ejs") %>

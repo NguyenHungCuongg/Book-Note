@@ -1,0 +1,13 @@
+{
+  "files.associations": {
+    "*.ejs": "html",
+    "vector": "cpp",
+    "limits": "cpp",
+    "initializer_list": "cpp",
+    "type_traits": "cpp",
+    "xstring": "cpp",
+    "xutility": "cpp",
+    "xlocale": "cpp",
+    "format": "cpp"
+  }
+}

@@ -1,0 +1,161 @@
+  <%- include("header.ejs") %>
+  <main class="view1 view2">
+    <!--Landing page-->
+    <section id="My_carousel" class="pb-2">
+      <div id="Carousel_container"> 
+        <div id="Carousel_title_container">
+          <p class="text-center lh-1">
+            <span id="Carousel_title" style="font-family: 'loto';">Welcome to<br>Book Notes</span>
+            <span id="Carousel_description">
+              <br>Keep track of the books you've read, along with
+              <br>your notes and ratings, all in one place.</span>
+          </p>
+        </div>
+        <div class="Carousel_item active">
+          <img src="/images/glasses-1052010_1920.jpg" alt="Book 1">
+        </div>
+        <div class="Carousel_item">
+          <img src="/images/old-books-436498_1920.jpg" alt="Book 2">
+        </div>
+        <div class="Carousel_item">
+          <img src="/images/book-1052014_1920.jpg" alt="Book 3">
+        </div>
+      </div>
+    </section>
+    <!--Discovery page-->
+    <section class="My_fiction_books py-5 my-5">
+      <h1 class="Fiction_books_header Genre_header fw-bolder">Top Fiction Books </h1>
+      <p class="Fiction_books_subheader Genre_subheader">Rated by Google Books</p>
+      <div class="Fiction_books_container swiper py-5">
+        <div class="Book_list text-center swiper-wrapper">
+          <% for(let i=0; i< Fiction_Books_List.length; i++){ %>
+          <div class="Book_item swiper-slide card d-flex py-2 px-3 shadow"  style="width: 240px; height: 600px;">
+            <% if (Fantasy_Books_List[i].volumeInfo.imageLinks) { %>
+              <img src="<%= Fiction_Books_List[i].volumeInfo.imageLinks.thumbnail %>" loading="lazy" style="width: 100%; height: auto;">
+            <% } else { %>
+              <img src="/images/not found cover.jpg" style="width: 100%; height: auto;">
+            <% } %>
+            <div class="card-body text-start">
+              <h5 class="card-title"><%= Fiction_Books_List[i].volumeInfo.title%></h5>
+              <p class="card-text">
+                Author: <%= Fiction_Books_List[i].volumeInfo.authors ? Fiction_Books_List[i].volumeInfo.authors[0] : 'Unknown Author' %>
+                <br>Published Date: <%= Fiction_Books_List[i].volumeInfo.publishedDate ? Fiction_Books_List[i].volumeInfo.publishedDate : 'N/A' %>
+              </p>
+              <form class="addBookForm" action="/addbook/<%= Fiction_Books_List[i].id %>" method="POST">
+                <button type="submit" class="btn btn-primary fw-medium">Add to My Books</button>
+              </form>
+            </div>  
+          </div>
+          <% } %>
+        </div>
+        <div class="swiper-pagination"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+        <div class="fade-effect-left"></div>
+        <div class="fade-effect-right"></div>
+      </div>
+    </section>
+
+    <section class="My_fantasy_books py-5 my-5">
+      <h1 class="Fantasy_books_header Genre_header fw-bolder">Top Fantasy Books </h1>
+      <p class="Fantasy_books_subheader Genre_subheader">Rated by Google Books</p>
+      <div class="Fantasy_books_container swiper py-5">
+        <div class="Book_list text-center swiper-wrapper">
+          <% for(let i=0; i< Fantasy_Books_List.length; i++){ %>
+          <div class="Book_item swiper-slide card d-flex py-2 px-3 shadow"  style="width: 240px; height: 600px;">
+            <% if (Fantasy_Books_List[i].volumeInfo.imageLinks) { %>
+              <img src="<%= Fantasy_Books_List[i].volumeInfo.imageLinks.thumbnail %>" loading="lazy" style="width: 100%; height: auto;">
+            <% } else { %>
+              <img src="/images/not found cover.jpg" style="width: 100%; height: auto;">
+            <% } %>
+            <div class="card-body text-start">
+              <h5 class="card-title"><%= Fantasy_Books_List[i].volumeInfo.title%></h5>
+              <p class="card-text">
+                Author: <%= Fantasy_Books_List[i].volumeInfo.authors ? Fantasy_Books_List[i].volumeInfo.authors[0] : 'Unknown Author' %>
+                <br>Published Date: <%= Fantasy_Books_List[i].volumeInfo.publishedDate ? Fantasy_Books_List[i].volumeInfo.publishedDate : 'N/A' %>
+              </p>
+              <form class="addBookForm" action="/addbook/<%= Fantasy_Books_List[i].id %>" method="POST">
+                <button type="submit" class="btn btn-primary fw-medium">Add to My Books</button>
+              </form>
+            </div>  
+          </div>
+          <% } %>
+        </div>
+        <div class="swiper-pagination"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+        <div class="fade-effect-left"></div>
+        <div class="fade-effect-right"></div>
+      </div>
+    </section>
+
+    <section class="My_selfhelp_books py-5 my-5">
+      <h1 class="SelfHelp_books_header Genre_header fw-bolder">Top Self-help Books </h1>
+      <p class="SelfHelp_books_subheader Genre_subheader">Rated by Google Books</p>
+      <div class="SelfHelp_books_container swiper py-5">
+        <div class="Book_list text-center swiper-wrapper">
+          <% for(let i=0; i< SelfHelp_Books_List.length; i++){ %>
+          <div class="Book_item swiper-slide card d-flex py-2 px-3 shadow"  style="width: 240px; height: 600px;">
+            <% if (SelfHelp_Books_List[i].volumeInfo.imageLinks) { %>
+              <img src="<%= SelfHelp_Books_List[i].volumeInfo.imageLinks.thumbnail %>" loading="lazy" style="width: 100%; height: auto;">
+            <% } else { %>
+              <img src="/images/not found cover.jpg" style="width: 100%; height: auto;">
+            <% } %>
+            <div class="card-body text-start">
+              <h5 class="card-title"><%= SelfHelp_Books_List[i].volumeInfo.title%></h5>
+              <p class="card-text">
+                Author: <%= SelfHelp_Books_List[i].volumeInfo.authors ? SelfHelp_Books_List[i].volumeInfo.authors[0] : 'Unknown Author' %>
+                <br>Published Date: <%= SelfHelp_Books_List[i].volumeInfo.publishedDate ? SelfHelp_Books_List[i].volumeInfo.publishedDate : 'N/A' %>
+              </p>
+              </p>
+              <form class="addBookForm" action="/addbook/<%=SelfHelp_Books_List[i].id %>" method="POST">
+                <button type="submit" class="btn btn-primary fw-medium">Add to My Books</button>
+              </form>
+            </div>  
+          </div>
+          <% } %>
+        </div>
+        <div class="swiper-pagination"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+        <div class="fade-effect-left"></div>
+        <div class="fade-effect-right"></div>
+      </div>
+    </section>
+
+    <section class="My_education_books py-5 my-5">
+      <h1 class="Education_books_header Genre_header fw-bolder">Top Education Books </h1>
+      <p class="Education_books_subheader Genre_subheader">Rated by Google Books</p>
+      <div class="Education_books_container swiper py-5">
+        <div class="Book_list text-center swiper-wrapper">
+          <% for(let i=0; i< Education_Books_List.length; i++){ %>
+          <div class="Book_item swiper-slide card d-flex py-2 px-3 shadow"  style="width: 240px; height: 600px;">
+            <% if (Education_Books_List[i].volumeInfo.imageLinks) { %>
+              <img src="<%= Education_Books_List[i].volumeInfo.imageLinks.thumbnail %>" loading="lazy" style="width: 100%; height: auto;">
+            <% } else { %>
+              <img src="/images/not found cover.jpg" style="width: 100%; height: auto;">
+            <% } %>
+            <div class="card-body text-start">
+              <h5 class="card-title"><%= Education_Books_List[i].volumeInfo.title%></h5>
+              <p class="card-text">
+                Author: <%= Education_Books_List[i].volumeInfo.authors ? Education_Books_List[i].volumeInfo.authors[0] : 'Unknown Author' %>
+                <br>Published Date: <%= Education_Books_List[i].volumeInfo.publishedDate ? Education_Books_List[i].volumeInfo.publishedDate : 'N/A' %>
+              </p>
+              </p>
+              <form class="addBookForm" action="/addbook/<%=Education_Books_List[i].id %>" method="POST">
+                <button type="submit" class="btn btn-primary fw-medium">Add to My Books</button>
+              </form>
+            </div>  
+          </div>
+          <% } %>
+        </div>
+        <div class="swiper-pagination"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+        <div class="fade-effect-left"></div>
+        <div class="fade-effect-right"></div>
+      </div>
+    </section>
+
+  </main>
+  <%- include("footer.ejs") %>
